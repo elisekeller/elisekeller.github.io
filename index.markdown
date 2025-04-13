@@ -49,16 +49,16 @@ Effectively, a practical implementation of this type of program would be able to
 
 ---
 
-<div style="text-align: center;">
+#<div style="text-align: center;">
   <img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
-</div>
+#</div>
 Heatmap of Wildfire Spread 100 timesteps into the future; distribution determines the most dangerous future cells with respect to the cell value (The population density of that cell)
 
 ---
 
-<div style="text-align: center;">
+#<div style="text-align: center;">
   <img src="/images/image2.png" alt="" width="800">
-</div>
+#</div>
 Heatmap changes that reflect where the Optimized Deployment of first responders and aid should be 100 timesteps into the future. Due to limitations of quantum simulation/classical computing, the original heatmap must be reduced down to a 50x50 matrix. Quantum computing could find the optimal solution on the 250x250 in exponentially less time.
 
 ---
