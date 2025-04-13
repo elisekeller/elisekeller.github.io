@@ -6,7 +6,7 @@ layout: default
 ---
 
 <center><h1> Enhancing Wildfire Response through Quantum Optimization </h1></center>
-Welcome to Qooked! Our team has developed a platform to better understand and simulate the spread of wildfires. In partnership with Tahoe-Quantum, we created an algorithm that predicts how fires are likely to move based on terrain and population density. This helps determine where emergency responders are needed most. Our goal is to offer an innovative tool that not only saves money—but more importantly, saves lives.
+Welcome to Qooked! Our team has developed a platform to better understand and simulate the spread of wildfires. In partnership with Tahoe-Quantum, we created an algorithm that predicts how fires are likely to move based on terrain and population density. This helps determine where emergency responders are needed most. Our goal is to offer an innovative tool that not only saves money—but most importantly, saves lives.
 
 ---
 
@@ -107,10 +107,10 @@ def spread_fire(city, forest, fire, p_base=0.1):
     return new_fire
 ```
 
-The output is an animated sequence that shows the progression of fire through time, revealing patterns and high-risk zones that are critical for decision-making.
-![Fire Spread](/images/image3.gif){:width="400"}
+The output is an animated sequence that shows the progression of fire over time, revealing how it moves more rapidly through forests and densely populated zones. These patterns highlight high-risk areas and provide crucial insight for optimizing emergency response strategies.
 
-Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
+![Fire Spread](/images/image3.gif){:width="500"}
+
 
 ---
 
@@ -129,9 +129,11 @@ for _ in range(num_simulations):
 heatmap = heatmap / num_simulations  # Normalize to get probabilities
 ```
 
-<img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
+This heatmap reveals the most dangerous regions in the next 100 timesteps and serves as a probability-based model of future fire impact. Areas with higher values indicate both greater flammability and a higher likelihood of sustained fire activity, often due to the combination of high population density and forest coverage.
 
-Heatmap of Wildfire Spread 100 timesteps into the future; distribution determines the most dangerous future cells with respect to the cell value (The population density of that cell)
+<img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="500">
+
+This output becomes the foundation for the next stage—optimizing where to allocate firefighting resources for maximum effectiveness.
 
 ---
 
@@ -167,8 +169,9 @@ sampleset = sampler.sample_qubo(qubo, num_reads=100)
 ---
 
 <h2 style="padding-top: 25px;">5: Comparing Optimization Results</h2>
-To show the effectiveness of the quantum approach, we compare our optimized responder layout to a baseline strategy like uniform grid placement. The quantum-optimized solution typically uses fewer units and achieves better coverage of dangerous areas, demonstrating its practical advantages.
-Visual side-by-side comparisons help illustrate the difference in resource efficiency and risk coverage. This highlights how quantum-inspired methods can significantly improve decision-making under complex constraints.
+To demonstrate the effectiveness of the quantum optimization, we compare the QUBO-based responder placement to a simpler baseline strategy, such as uniformly distributing units across the grid. The quantum-optimized layout typically requires fewer responders while offering better coverage of high-risk zones, making it a more efficient and targeted solution.
+
+The visual comparison shows how the deployment changes based on risk concentration rather than arbitrary spacing. These changes are derived from our heatmap 100 timesteps into the future and reflect the most strategic locations for dispatching first responders and aid.
 
 ```python
 def evaluate_coverage(risk_map, placement):
@@ -181,8 +184,8 @@ def evaluate_coverage(risk_map, placement):
 <img src="/images/image2.png" alt="" width="800">
 <h2 style="padding-top: 15px;"></h2>
 
-Heatmap changes that reflect where the Optimized Deployment of first responders and aid should be 100 timesteps into the future. Due to limitations of quantum simulation/classical computing, the original heatmap must be reduced down to a 50x50 matrix. Quantum computing could find the optimal solution on the 250x250 in exponentially less time.
 
+Due to hardware limitations in both classical simulation and current quantum solvers, we reduce the original 250×250 heatmap to a manageable 50×50 matrix during optimization. However, full-scale quantum systems would be capable of solving the larger version in exponentially less time—demonstrating the potential scalability of this approach for real-world emergency logistics.
 
 
 
