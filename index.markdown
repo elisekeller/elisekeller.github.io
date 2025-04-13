@@ -5,7 +5,7 @@
 layout: default
 ---
 
-<center><h1> Enhancing Wildfire Response through Quantum Optimization </h1></center>
+<center><h1> Enhancing Wildfire Response Through Quantum Optimization </h1></center>
 Welcome to Qooked! Our team has developed a platform to better understand and simulate the spread of wildfires. In partnership with Tahoe-Quantum, we created an algorithm that predicts how fires are likely to move based on terrain and population density. This helps determine where emergency responders are needed most. Our goal is to offer an innovative tool that not only saves money—but most importantly, saves lives.
 
 ---
@@ -64,7 +64,7 @@ Effectively, a practical implementation of this type of program would be able to
 
 
 
-<center><h2 style="padding-top: 50px;">Fire Spread Analysis and Optimization Results</h2></center>
+<center><h1 style="padding-top: 50px;">Fire Spread Analysis and Optimization Results</h1></center>
 
 <h2 style="padding-top: 25px;">1: Simulating a City and Environment</h2>
 We first create a synthetic environment using city_generator.py and Forest.py. Cities are represented as matrices with population densities ranging from 0 to 7, while forests and arid materials are scattered throughout the grid.
