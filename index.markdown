@@ -39,7 +39,9 @@ After creating a matrix, we can run the simulation of fire spreading from a rand
 Our main program, Firethreat.py, allows one to create a random city, run the simulation of fire spread for n timesteps, and then return the most dangerous areas predicted in the next 100 timesteps as a heatmap. 
 
 ### Quantum Optimization
-With the simulation complete, this final heatmap matrix can be run through our quantum simulation to produce a minimized binary matrix that quickly represents the most optimal location and allocation of resources, covering the most needed areas with the most efficient usage. 
+With the simulation complete, this final heatmap matrix can be run through our quantum simulation to produce a minimized binary matrix that represents the most optimal location and allocation of resources, targeting the most at-risk areas with maximal efficiency.
+
+
 
 ---
 
