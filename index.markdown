@@ -49,9 +49,6 @@ Effectively, a practical implementation of this type of program would be able to
 
 ---
 
-<img src="/images/image1.png" alt="Image 1" width="500">
-
-
-
-
-
+<div style="text-align: center;">
+  <img src="/assets/img/your-image.png" alt="Alt text" width="500">
+</div>
