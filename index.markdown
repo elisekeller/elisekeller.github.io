@@ -41,13 +41,15 @@ Our main program, Firethreat.py, allows one to create a random city, run the sim
 ### Quantum Optimization
 With the simulation complete, this final heatmap matrix can be run through our quantum simulation to produce a minimized binary matrix that represents the most optimal location and allocation of resources, targeting the most at-risk areas with maximal efficiency.
 
-
-
 ---
 
 <h2 style="padding-top: 25px;">Real-World Applications and Future Potential</h2>
 
 Effectively, a practical implementation of this type of program would be able to map to actual real world cities or counties, select the origin point of a wildfire, find the most dangerous areas to be affected, and return the most efficient allocation of resources. A fully implemented client program could further scout for more in depth variables such as topographical area, weather conditions, humidity, and wind speeds, which all further affect fire propagation.
+
+---
+
+! [Image 1] (/images/image1.png)
 
 
 
