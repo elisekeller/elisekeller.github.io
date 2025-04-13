@@ -57,15 +57,16 @@ Heatmap of Wildfire Spread 100 timesteps into the future; distribution determine
 ---
 
 <div style="text-align: center;">
-  <img src="/images/image2.png" alt="" width="500">
+  <img src="/images/image2.png" alt="" width="800">
 </div>
 Heatmap changes that reflect where the Optimized Deployment of first responders and aid should be 100 timesteps into the future. Due to limitations of quantum simulation/classical computing, the original heatmap must be reduced down to a 50x50 matrix. Quantum computing could find the optimal solution on the 250x250 in exponentially less time.
 
 ---
       
 <div style="text-align: center;">
-  <img src="/images/image3.png" alt="" width="500">
+  <img src="/images/fire-spread.gif" alt="Fire Spread" width="600">
 </div>
+
 Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
 
 
