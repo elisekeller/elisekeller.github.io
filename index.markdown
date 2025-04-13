@@ -190,5 +190,14 @@ Due to hardware limitations in both classical simulation and current quantum sol
 
 
 
+---
 
+<center><h2 style="padding-top: 50px;">From Simulation to Real-World Impact</h2></center>
 
+Wildfires continue to grow in frequency and severity—but so does our capacity to respond. Through this project, we’ve shown how quantum-inspired optimization and simulation can work together to model complex fire behavior, predict areas of greatest risk, and deploy resources with precision.
+
+By combining detailed environmental modeling with advanced computing techniques like QUBO-based optimization, we are not only improving emergency planning but also exploring how next-generation technology can address urgent global challenges.
+
+While this is a simulation, the tools and methodology are real—and scalable. With greater access to quantum hardware and real-world fire data, this framework could evolve into a powerful decision-making system used by first responders and public safety agencies.
+
+We hope this work demonstrates how science and technology can come together to protect communities, environments, and lives in the face of natural disasters.
