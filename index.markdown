@@ -26,7 +26,21 @@ The quantum component of our project lies in the optimization of the QUBO. We co
 ---
 
 ## How The Simulation Works:
-We separated our challenge into two separate parts to best utilize an effective method in which quantum computing will help to determine the proper course of action in preventing wildfires. The first section of our method is simulation, accurately plotting a randomly generated city and collection of forests/arid material using a matrix. The cities were represented by a population density from integers 0 to 7, and distributed so that denser cells were more likely to originate next to each other and away from forest/arid material. After creating the matrix, we then ran a simulation of fire spreading from a randomly determined forest origin. The probability of adjacent cells catching fire was determined by their weight in population density and material (arid material or not). Increased density and arid material increased the probability of fire spread to simulate how largely dense areas tend to increase fire propagation. Our main program, Firethreat.py, would allow one to create a random city, run the simulation of fire spread for n timesteps, and then return the most dangerous areas predicted in the next 100 timesteps as a heatmap. With the simulation complete, this final heatmap matrix will be run through our quantum simulation to produce a minimized binary matrix that quickly represents the most optimal location and allocation of resources, covering the most needed area with the most efficient usage. Effectively, a practical implementation of this type of program would be able to map to actual real world cities or counties, select the origin point of a wildfire, find the most dangerous areas to be affected, and return the most efficient allocation of resources. A fully implemented client program could further scout for more in depth variables such as topographical area, weather conditions, humidity, and wind speeds, which all further affect fire propagation.
+
+### Simulation
+We separated our challenge into two separate parts to best utilize an effective method in which quantum computing will help to determine the proper course of action in preventing wildfires. 
+
+The first section of our method is simulation; accurately plotting a randomly generated city and collection of forests/arid material using a matrix. The cities are represented by a population density from integers 0 to 7, and distributed so that denser cells were are likely to originate next to each other, and away from forest/arid material. 
+
+After creating a matrix, we can run the simulation of fire spreading from a randomly determined forest origin. The probability of adjacent cells catching fire is determined by their weight in population density and material (arid material or not). Increased density and arid material increase the probability of fire spread to simulate how largely dense areas tend to increase fire propagation. 
+
+Our main program, Firethreat.py, allows one to create a random city, run the simulation of fire spread for n timesteps, and then return the most dangerous areas predicted in the next 100 timesteps as a heatmap. 
+
+### Quantum Optimization
+With the simulation complete, this final heatmap matrix can be run through our quantum simulation to produce a minimized binary matrix that quickly represents the most optimal location and allocation of resources, covering the most needed areas with the most efficient usage. 
+
+### Real-World Application
+Effectively, a practical implementation of this type of program would be able to map to actual real world cities or counties, select the origin point of a wildfire, find the most dangerous areas to be affected, and return the most efficient allocation of resources. A fully implemented client program could further scout for more in depth variables such as topographical area, weather conditions, humidity, and wind speeds, which all further affect fire propagation.
 
 
 
