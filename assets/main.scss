@@ -1,0 +1,26 @@
+.site-wrapper {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.toc {
+  flex: 0 0 240px;
+  padding: 1rem;
+  position: sticky;
+  top: 2rem;
+  height: max-content;
+  font-size: 0.9rem;
+  border-right: 1px solid #eee;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.page-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
