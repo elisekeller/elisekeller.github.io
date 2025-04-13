@@ -5,12 +5,12 @@
 layout: default
 ---
 
-# Section 1
+# Title
 cxvkj
 
 ---
 
-# Section 2
+## Section 1
 Code example:
 
 ```js
@@ -21,5 +21,5 @@ function greet(name) {
 
 ---
 
-# Section 3
+## Section 2
 dsfkjhskjdfhjksdf
