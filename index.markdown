@@ -49,7 +49,7 @@ Effectively, a practical implementation of this type of program would be able to
 
 ---
 
-! [Image 1] (/images/image1.png)
+! [Image 1] (.../images/image1.png)
 
 
 
