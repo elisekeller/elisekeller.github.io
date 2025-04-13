@@ -49,7 +49,7 @@ Effectively, a practical implementation of this type of program would be able to
 
 ---
 
-![Alt text](/assets/img/image1.png)
+<img src="/assets/img/image1.png" alt="Image 1" width="500">
 
 
 
