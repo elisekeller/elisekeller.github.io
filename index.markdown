@@ -51,6 +51,15 @@ Effectively, a practical implementation of this type of program would be able to
 
 ---
 
+
+<h2 style="padding-top: 10px;"></h2>
+![yay](/images/image3.gif){:width="400"}
+
+
+Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
+
+---
+
 <h2 style="padding-top: 10px;"></h2>
 <img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
 
@@ -63,16 +72,3 @@ Heatmap of Wildfire Spread 100 timesteps into the future; distribution determine
 <h2 style="padding-top: 15px;"></h2>
 
 Heatmap changes that reflect where the Optimized Deployment of first responders and aid should be 100 timesteps into the future. Due to limitations of quantum simulation/classical computing, the original heatmap must be reduced down to a 50x50 matrix. Quantum computing could find the optimal solution on the 250x250 in exponentially less time.
-
----
-
-<h2 style="padding-top: 10px;"></h2>
-![yay](/images/image3.gif){:width="400"}
-
-
-Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
-
-
-
-
-
