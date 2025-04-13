@@ -50,5 +50,5 @@ Effectively, a practical implementation of this type of program would be able to
 ---
 
 <div style="text-align: center;">
-  <img src="/assets/img/your-image.png" alt="Alt text" width="500">
+  <img src="/images/image1.png" alt="Alt text" width="500">
 </div>
