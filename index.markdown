@@ -49,7 +49,7 @@ Effectively, a practical implementation of this type of program would be able to
 
 ---
 
-<h2 style="padding-top: 15px;"></h2>
+<h2 style="padding-top: 10px;"></h2>
 <img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
 
 Heatmap of Wildfire Spread 100 timesteps into the future; distribution determines the most dangerous future cells with respect to the cell value (The population density of that cell)
@@ -63,7 +63,7 @@ Heatmap changes that reflect where the Optimized Deployment of first responders 
 
 ---
 
-<h2 style="padding-top: 15px;"></h2>
+<h2 style="padding-top: 10px;"></h2>
 ![yay](/images/image3.gif){:width="400"}
 
 
