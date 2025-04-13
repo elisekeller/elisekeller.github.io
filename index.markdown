@@ -71,20 +71,43 @@ We first create a synthetic environment using city_generator.py and Forest.py. C
 The result is a synthetic but realistic environment with both urban and wildland areas, providing the foundation for simulating how a fire might behave.
 
 ```python
-# Create a city matrix with densities from 0 to 7
-city = np.zeros((n, n))
-for i in range(n):
-    for j in range(n):
-        if random.random() < city_bias:
-            city[i][j] = np.random.randint(4, 8)
-        else:
-            city[i][j] = np.random.randint(0, 3)
+def generate_large_cluster_city_matrix(size, forest_matrix, smoothness=10.0, distance_influence=2.0, center_bias=2.0):
+    """
+    Generates a city layout matrix with population density favorably distributed:
+    
+-1 = TREE (unbuildable)
+0  = buildable but unpopulated
+1–8 = increasing levels of population density
+"""# Step 1: Random noise, smoothed
+raw_noise = np.random.rand(size, size)
+smoothed = gaussian_filter(raw_noise, sigma=smoothness)
+
+    # Step 2: Distance from trees
+    tree_mask = (forest_matrix == TREE)
+    distance_map = distance_transform_edt(~tree_mask)
+
+    # Step 3: Distance from center (bias toward center)
+    y, x = np.indices((size, size))
+    center_y, center_x = size // 2, size // 2
+    dist_to_center = np.sqrt((x - center_x)2 + (y - center_y)2)
+    center_bias_map = 1 - (dist_to_center / dist_to_center.max())  # 1 at center, 0 at corners
+
+    # Step 4: Normalize input maps
+    smoothed_norm = (smoothed - smoothed.min()) / (smoothed.max() - smoothed.min())
+    distance_norm = (distance_map - distance_map.min()) / (distance_map.max() - distance_map.min())
+
+    # Step 5: Combine factors
+    biased_density = smoothed_norm * (distance_norm  distance_influence) * (center_bias_map  center_bias)
+
+    # Step 6: Scale to 1–8, threshold very low values to 0 (no pop), and set trees to -1
+    scaled_density = (biased_density / biased_density.max()) * 8
+    city_matrix = scaled_density.astype(int)
+    city_matrix[city_matrix < 1] = 0         # No population
+    city_matrix[tree_mask] = -1              # Forest cells
+
+    return city_matrix
 ```
 
-```python
-# Overlay forest with boolean mask for flammable areas
-forest = np.random.choice([0, 1], size=(n, n), p=[0.75, 0.25])
-```
 
 ---
 
@@ -92,19 +115,48 @@ forest = np.random.choice([0, 1], size=(n, n), p=[0.75, 0.25])
 Next, we ignite a fire at a randomly selected forest location. The fire spreads across the matrix over a series of timesteps. Whether a cell catches fire depends on its surrounding conditions — densely populated areas and nearby forests are more likely to ignite. This spreading process is repeated frame-by-frame to visualize how the fire grows. 
 
 ```python
-# Fire spread logic: higher density and forest = higher chance
-def spread_fire(city, forest, fire, p_base=0.1):
-    new_fire = fire.copy()
-    for i in range(n):
-        for j in range(n):
-            if fire[i, j] == 1:
-                for dx, dy in [(-1,0), (1,0), (0,-1), (0,1)]:
-                    ni, nj = i + dx, j + dy
-                    if 0 <= ni < n and 0 <= nj < n and fire[ni, nj] == 0:
-                        prob = p_base + 0.1 * city[ni, nj] + 0.2 * forest[ni, nj]
-                        if np.random.rand() < prob:
-                            new_fire[ni, nj] = 1
-    return new_fire
+def step(self):
+        new_grid = self.grid.copy()
+        new_fire_time = self.fire_time.copy()
+
+        fire_yx = np.argwhere(self.grid == FIRE)
+        for y, x in fire_yx:
+            # Burned out?
+            if self.fire_time[y, x] >= BURN_DURATION:
+                new_grid[y, x] = 0  # Becomes EMPTY
+                new_fire_time[y, x] = 0
+                continue
+
+            new_fire_time[y, x] += 1
+
+            for dy in [-1, 0, 1]:
+                for dx in [-1, 0, 1]:
+                    if dy == 0 and dx == 0:
+                        continue
+                    ny, nx = y + dy, x + dx
+                    if 0 <= ny < self.grid.shape[0] and 0 <= nx < self.grid.shape[1]:
+                        target = self.grid[ny, nx]
+
+                        # Spread fire to trees
+                        if target == TREE and np.random.random() < TREE_SPREAD_PROB:
+                            new_grid[ny, nx] = FIRE
+                            new_fire_time[ny, nx] = 1
+                        # Spread fire to non-tree areas based on population density
+                        elif target != FIRE and target != TREE:
+                            # Calculate spread probability based on population density
+                            population_density = self.grid[ny, nx]
+                            if population_density == 0:
+                                prob = EMPTY_SPREAD_PROB  # Regular empty land
+                            else:
+                                # Slightly increase spread probability based on population density
+                                prob = EMPTY_SPREAD_PROB * (1 + population_density * SPREAD_DENSITY_SCALE)
+
+                            if np.random.random() < prob:
+                                new_grid[ny, nx] = FIRE
+                                new_fire_time[ny, nx] = 1
+
+        self.grid = new_grid
+        self.fire_time = new_fire_time
 ```
 
 The output is an animated sequence that shows the progression of fire over time, revealing how it moves more rapidly through forests and densely populated zones. These patterns highlight high-risk areas and provide crucial insight for optimizing emergency response strategies.
@@ -119,14 +171,19 @@ To anticipate where the fire is most likely to go, we run the fire spread simula
 Brighter areas on the heatmap indicate locations that are consistently affected by fire across simulations. This heatmap is then used as input for the optimization step, serving as a probability-based model of where fire poses the greatest threat.
 
 ```python
-# Simulate fire n times and count how often each cell ignites
-heatmap = np.zeros_like(city)
-for _ in range(num_simulations):
-    fire = init_fire()
-    for t in range(num_steps):
-        fire = spread_fire(city, forest, fire)
-        heatmap += fire
-heatmap = heatmap / num_simulations  # Normalize to get probabilities
+# Normalize final danger matrix before scaling
+    normalized_total_danger = normalize(total_danger)
+    scaled_danger = np.round(normalized_total_danger * 9).clip(0, 9).astype(int)
+
+    # Final display
+    plt.figure(figsize=(6, 6))
+    plt.imshow(scaled_danger, cmap="inferno", interpolation="nearest")
+    plt.title("Predicted Fire Danger Map (Next 100 Steps)")
+    plt.axis("off")
+    plt.colorbar(label="Danger Level (0–9)")
+    plt.show()
+
+    return scaled_danger, fire_sim.fire_time, city, forest
 ```
 
 This heatmap reveals the most dangerous regions in the next 100 timesteps and serves as a probability-based model of future fire impact. Areas with higher values indicate both greater flammability and a higher likelihood of sustained fire activity, often due to the combination of high population density and forest coverage.
@@ -143,27 +200,52 @@ We also include a penalty that discourages placing units too close together, ens
 The output is a binary matrix showing the optimal responder placements. Each 1 in the matrix represents a location where a responder should be stationed based on risk, spacing, and efficiency.
 
 ```python
-# Objective: minimize high-risk values + avoid clustering
-H = 0
-for i in range(n):
-    for j in range(n):
-        H += heatmap[i][j] * Binary(f"x{i}_{j}")
+def matrix_to_qubo(matrix, alpha=2, beta=4, allow_adjacent_penalty=True):
+    n = matrix.shape[0]
+    variables = {}
 
-# Penalty: discourage adjacent responder placements
-for i in range(n):
-    for j in range(n):
-        if i < n - 1:
-            H += beta * Binary(f"x{i}_{j}") * Binary(f"x{i+1}_{j}")
-        if j < n - 1:
-            H += beta * Binary(f"x{i}_{j}") * Binary(f"x{i}_{j+1}")
+    for i in range(n):
+        for j in range(n):
+            variables[(i, j)] = Binary(f"x{i}{j}")
+
+    # Objective: maximize matrix values (minimize negative weighted sum)
+    H = -sum(matrix[i][j] * variables[(i, j)] for i in range(n) for j in range(n))
+
+    # Penalty for number of units used
+    total_selected = sum(variables[(i, j)] for i in range(n) for j in range(n))
+    H += float(alpha).float() * total_selected
+
+    # Penalty for adjacent units selected together
+    if allow_adjacent_penalty:
+        for i in range(n):
+            for j in range(n):
+                if i < n - 1:
+                    H += float(beta).float() * variables[(i, j)] * variables[(i + 1, j)]
+                if j < n - 1:
+                    H += float(beta).float() * variables[(i, j)] * variables[(i, j + 1)]
+
+    model = H.compile()
+    qubo, offset = model.to_qubo()
+    return qubo, offset, model
 ```
 
 ```python
-# Compile and solve using simulated annealing
-model = H.compile()
-qubo, offset = model.to_qubo()
-sampler = TabuSampler()
-sampleset = sampler.sample_qubo(qubo, num_reads=100)
+# Solving the QUBO with the Simulated Annealing Sampler
+def solve_qubo_with_neal(matrix, alpha=2, beta=4, num_reads=100):
+    qubo, offset, model = matrix_to_qubo(matrix, alpha=alpha, beta=beta)
+    sampler = SimulatedAnnealingSampler()
+    sampleset = sampler.sample_qubo(qubo, num_reads=num_reads)
+    decoded_samples = model.decode_sampleset(sampleset)
+    best_sample = decoded_samples[0]
+
+    n = matrix.shape[0]
+    solution_matrix = np.zeros((n, n))
+    for i in range(n):
+        for j in range(n):
+            varname = f"x{i}{j}"
+            solution_matrix[i, j] = best_sample.sample.get(varname, 0)
+
+    return solution_matrix, best_sample.energy + offset
 ```
 
 ---
@@ -174,10 +256,24 @@ To demonstrate the effectiveness of the quantum optimization, we compare the QUB
 The visual comparison shows how the deployment changes based on risk concentration rather than arbitrary spacing. These changes are derived from our heatmap 100 timesteps into the future and reflect the most strategic locations for dispatching first responders and aid.
 
 ```python
-def evaluate_coverage(risk_map, placement):
-    coverage_score = np.sum(risk_map * placement)
-    unit_count = np.sum(placement)
-    return coverage_score, unit_count
+# Visualization function
+def plot_all_heatmaps(original_map, resized_map, solution_map):
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+    im1 = axes[0].imshow(original_map, cmap="Blues", interpolation='nearest')
+    axes[0].set_title("Original Threat Map (250x250)")
+    fig.colorbar(im1, ax=axes[0])
+
+    im2 = axes[1].imshow(resized_map, cmap="Blues", interpolation='nearest')
+    axes[1].set_title("Resized Heatmap (50x50)")
+    fig.colorbar(im2, ax=axes[1])
+
+    im3 = axes[2].imshow(solution_map, cmap="Blues", interpolation='nearest')
+    axes[2].set_title("Optimized Deployment Solution")
+    fig.colorbar(im3, ax=axes[2])
+
+    plt.tight_layout()
+    plt.show()
 ```
 
 <h2 style="padding-top: 30px;"></h2>
