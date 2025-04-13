@@ -16,12 +16,12 @@ Our team is composed of four undergraduate students—two from Boston University
 ---
 
 ## Before the Quantum:
-Before the quantum component of our work lies the optimization of the QUBO matrix. A QUBO matrix is a REPRESENTATION of an optimization problem, where the goal is to find the best combination of binary variables to minimize a quadratic function. QUBOs are often used for graph problems, scheduling, and what we have here, resource allocation. With a QUBO matrix, we penalize adjacent edges for more efficient coverage of an area, which creates negative weights on areas where resources need to be allocated. This allows us to represent the problem with various constraints that serve our interest.
+Before diving into the quantum aspect of our work, we first focused on optimizing the problem using a QUBO formulation. A QUBO (Quadratic Unconstrained Binary Optimization) is a way of **representing** an optimization problem using binary variables. It's commonly used in areas like scheduling, graph analysis, and, in our case, resource allocation. By incorporating penalties for placing resources too close together, the QUBO helps us model important constraints and make more strategic decisions about where support is most needed.
 
 ---
 
 ## About the Quantum:
-The Quantum component of our project lies in the optimization of the QUBO. The QUBO is converted into a Ising Model, which is essentially a form that is easier to compute with qubits. (It’s the summation of the spins, fields and couplings). The quantum annealer then superimposes the bits into all possible combinations of 0 and 1. This is the part that regular computers struggle with. They need to compute each combination individually, while quantum computers can compute every state simultaneously. Their fast speeds are why we applied quantum to this project, since with larger simulations and matrices it would take exponentially longer to compute them without a quantum computer. 
+The quantum component of our project lies in the optimization of the QUBO. We convert the QUBO into an Ising model, a form that’s better suited for computation on quantum hardware. The Ising model represents the problem using spins, external fields, and couplings between variables. A quantum annealer then explores all possible combinations of binary variables by placing them into a superposition of 0s and 1s. Unlike classical computers, which must evaluate each combination one at a time, quantum systems can consider all configurations at once. This ability to process many possibilities in parallel is what makes quantum computing so powerful, especially for large-scale simulations, where classical methods become exponentially slower.
 
 ---
 
