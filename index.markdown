@@ -10,7 +10,8 @@ Welcome to Qooked! Our team has developed a platform to better understand and si
 
 ---
 
-## About Us:
+<h2 style="padding-top: 40px;">About Us</h2>
+
 Our team is composed of four undergraduate students—two from Boston University and two from Brandeis University. United by a shared passion for quantum computing, we took on this challenge with the goal of using our knowledge to make a meaningful, progressive impact on the world.
 
 ---
