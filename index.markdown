@@ -32,17 +32,3 @@ We separated our challenge into two separate parts to best utilize an effective 
 
 
 
-
-
----
-
-```js
-function greet(name) {
-  return "Hello, " + name + "!";
-}
-```
-
----
-
-## Section 2
-dsfkjhskjdfhjksdf
