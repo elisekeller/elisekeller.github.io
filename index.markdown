@@ -67,7 +67,7 @@ Effectively, a practical implementation of this type of program would be able to
 
 
 
-<h2 style="padding-top: 200px;">Fire Spread Analysis and Optimization Results</h2>
+<center><h2 style="padding-top: 200px;">Fire Spread Analysis and Optimization Results</h2></center>
 
 ### 1: Simulating a City and Environment
 We first create a synthetic environment using city_generator.py and Forest.py. Cities are represented as matrices with population densities ranging from 0 to 7, while forests and arid materials are scattered throughout the grid.
