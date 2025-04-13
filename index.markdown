@@ -56,11 +56,11 @@ Heatmap of Wildfire Spread 100 timesteps into the future; distribution determine
 
 ---
 
-<h2 style="padding-top: 25px;"></h2>
+<h2 style="padding-top: 30px;"></h2>
 <img src="/images/image2.png" alt="" width="800">
 
 Heatmap changes that reflect where the Optimized Deployment of first responders and aid should be 100 timesteps into the future. Due to limitations of quantum simulation/classical computing, the original heatmap must be reduced down to a 50x50 matrix. Quantum computing could find the optimal solution on the 250x250 in exponentially less time.
-<h2 style="padding-top: 10px;"></h2>
+<h2 style="padding-top: 20px;"></h2>
 
 ---
 
