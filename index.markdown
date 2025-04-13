@@ -12,8 +12,6 @@ cxvkj
 
 ---
 
-
-
 # Section 2
 Code example:
 
