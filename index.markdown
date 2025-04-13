@@ -16,17 +16,17 @@ Our team is composed of four undergraduate students—two from Boston University
 
 ---
 
-## Before the Quantum:
+<h2 style="padding-top: 25px;">QUBO Formulation: Structuring the Optimization Problem</h2>
 Before diving into the quantum aspect of our work, we first focused on optimizing the problem using a QUBO formulation. A QUBO (Quadratic Unconstrained Binary Optimization) is a way of **representing** an optimization problem using binary variables. It's commonly used in areas like scheduling, graph analysis, and, in our case, resource allocation. By incorporating penalties for placing resources too close together, the QUBO helps us model important constraints and make more strategic decisions about where support is most needed.
 
 ---
 
-## About the Quantum:
+<h2 style="padding-top: 25px;">From QUBO to Quantum: Solving with the Ising Model</h2>
 The quantum component of our project lies in the optimization of the QUBO. We convert the QUBO into an Ising model, a form that’s better suited for computation on quantum hardware. The Ising model represents the problem using spins, external fields, and couplings between variables. A quantum annealer then explores all possible combinations of binary variables by placing them into a superposition of 0s and 1s. Unlike classical computers, which must evaluate each combination one at a time, quantum systems can consider all configurations at once. This ability to process many possibilities in parallel is what makes quantum computing so powerful, especially for large-scale simulations, where classical methods become exponentially slower.
 
 ---
 
-## How The Simulation Works:
+<h2 style="padding-top: 25px;">Simulating Wildfires and Optimizing Response</h2>
 
 We separated our challenge into two separate parts to best utilize an effective method in which quantum computing will help to determine the proper course of action in preventing wildfires. 
 
@@ -41,7 +41,10 @@ Our main program, Firethreat.py, allows one to create a random city, run the sim
 ### Quantum Optimization
 With the simulation complete, this final heatmap matrix can be run through our quantum simulation to produce a minimized binary matrix that quickly represents the most optimal location and allocation of resources, covering the most needed areas with the most efficient usage. 
 
-### Real-World Application
+---
+
+<h2 style="padding-top: 25px;">Real-World Applications and Future Potential</h2>
+
 Effectively, a practical implementation of this type of program would be able to map to actual real world cities or counties, select the origin point of a wildfire, find the most dangerous areas to be affected, and return the most efficient allocation of resources. A fully implemented client program could further scout for more in depth variables such as topographical area, weather conditions, humidity, and wind speeds, which all further affect fire propagation.
 
 
