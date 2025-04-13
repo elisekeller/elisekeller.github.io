@@ -19,12 +19,12 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Qooked
-email: elisekeller14@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Powered by Jekyll
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username: elisekeller
+# email: elisekeller14@gmail.com
+# description: >- # this means to ignore newlines until "baseurl:"
+#   Powered by Jekyll
+# baseurl: "" # the subpath of your site, e.g. /blog
+# url: "" # the base hostname & protocol for your site, e.g. http://example.com
+# github_username: elisekeller
 
 # Build settings
 theme: minima
