@@ -3,15 +3,12 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
-title: 
+title: Section 1
 ---
 
 
-# Section 1
 
-<div>
-    <p>HTML test paragraph.</p>
-</div>
+cxvkj
 
 ---
 
