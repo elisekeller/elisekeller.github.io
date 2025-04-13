@@ -22,7 +22,9 @@ Before diving into the quantum aspect of our work, we first focused on optimizin
 ---
 
 <h2 style="padding-top: 25px;">From QUBO to Quantum: Solving with the Ising Model</h2>
-The quantum component of our project lies in the optimization of the QUBO. We convert the QUBO into an Ising model, a form that’s better suited for computation on quantum hardware. The Ising model represents the problem using spins, external fields, and couplings between variables. A quantum annealer then explores all possible combinations of binary variables by placing them into a superposition of 0s and 1s. Unlike classical computers, which must evaluate each combination one at a time, quantum systems can consider all configurations at once. This ability to process many possibilities in parallel is what makes quantum computing so powerful, especially for large-scale simulations, where classical methods become exponentially slower.
+The quantum component of our project lies in the optimization of the QUBO. We convert the QUBO into an Ising model, a form that’s better suited for computation on quantum hardware. The Ising model represents the problem using spins, external fields, and couplings between variables. A quantum annealer then explores all possible combinations of binary variables by placing them into a superposition of 0s and 1s. 
+
+Unlike classical computers, which must evaluate each combination one at a time, quantum systems can consider all configurations at once. This ability to process many possibilities in parallel is what makes quantum computing so powerful, especially for large-scale simulations, where classical methods become exponentially slower.
 
 ---
 
