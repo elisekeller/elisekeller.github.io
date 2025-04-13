@@ -10,7 +10,7 @@ layout: default
 
 This content is rendered directly into the layout between the header and footer.
 
----
+
 
 ## Section 2
 Code example:
