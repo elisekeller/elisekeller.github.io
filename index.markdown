@@ -74,13 +74,13 @@ The result is a synthetic but realistic environment with both urban and wildland
 def generate_large_cluster_city_matrix(size, forest_matrix, smoothness=10.0, distance_influence=2.0, center_bias=2.0):
     """
     Generates a city layout matrix with population density favorably distributed:
-    
--1 = TREE (unbuildable)
-0  = buildable but unpopulated
-1–8 = increasing levels of population density
-"""# Step 1: Random noise, smoothed
-raw_noise = np.random.rand(size, size)
-smoothed = gaussian_filter(raw_noise, sigma=smoothness)
+        
+    -1 = TREE (unbuildable)
+    0  = buildable but unpopulated
+    1–8 = increasing levels of population density
+    """# Step 1: Random noise, smoothed
+    raw_noise = np.random.rand(size, size)
+    smoothed = gaussian_filter(raw_noise, sigma=smoothness)
 
     # Step 2: Distance from trees
     tree_mask = (forest_matrix == TREE)
@@ -116,47 +116,47 @@ Next, we ignite a fire at a randomly selected forest location. The fire spreads 
 
 ```python
 def step(self):
-        new_grid = self.grid.copy()
-        new_fire_time = self.fire_time.copy()
+    new_grid = self.grid.copy()
+    new_fire_time = self.fire_time.copy()
 
-        fire_yx = np.argwhere(self.grid == FIRE)
-        for y, x in fire_yx:
-            # Burned out?
-            if self.fire_time[y, x] >= BURN_DURATION:
-                new_grid[y, x] = 0  # Becomes EMPTY
-                new_fire_time[y, x] = 0
-                continue
+    fire_yx = np.argwhere(self.grid == FIRE)
+    for y, x in fire_yx:
+        # Burned out?
+        if self.fire_time[y, x] >= BURN_DURATION:
+            new_grid[y, x] = 0  # Becomes EMPTY
+            new_fire_time[y, x] = 0
+            continue
 
-            new_fire_time[y, x] += 1
+        new_fire_time[y, x] += 1
 
-            for dy in [-1, 0, 1]:
-                for dx in [-1, 0, 1]:
-                    if dy == 0 and dx == 0:
-                        continue
-                    ny, nx = y + dy, x + dx
-                    if 0 <= ny < self.grid.shape[0] and 0 <= nx < self.grid.shape[1]:
-                        target = self.grid[ny, nx]
+        for dy in [-1, 0, 1]:
+            for dx in [-1, 0, 1]:
+                if dy == 0 and dx == 0:
+                    continue
+                ny, nx = y + dy, x + dx
+                if 0 <= ny < self.grid.shape[0] and 0 <= nx < self.grid.shape[1]:
+                    target = self.grid[ny, nx]
 
-                        # Spread fire to trees
-                        if target == TREE and np.random.random() < TREE_SPREAD_PROB:
+                    # Spread fire to trees
+                    if target == TREE and np.random.random() < TREE_SPREAD_PROB:
+                        new_grid[ny, nx] = FIRE
+                        new_fire_time[ny, nx] = 1
+                    # Spread fire to non-tree areas based on population density
+                    elif target != FIRE and target != TREE:
+                        # Calculate spread probability based on population density
+                        population_density = self.grid[ny, nx]
+                        if population_density == 0:
+                            prob = EMPTY_SPREAD_PROB  # Regular empty land
+                        else:
+                            # Slightly increase spread probability based on population density
+                            prob = EMPTY_SPREAD_PROB * (1 + population_density * SPREAD_DENSITY_SCALE)
+
+                        if np.random.random() < prob:
                             new_grid[ny, nx] = FIRE
                             new_fire_time[ny, nx] = 1
-                        # Spread fire to non-tree areas based on population density
-                        elif target != FIRE and target != TREE:
-                            # Calculate spread probability based on population density
-                            population_density = self.grid[ny, nx]
-                            if population_density == 0:
-                                prob = EMPTY_SPREAD_PROB  # Regular empty land
-                            else:
-                                # Slightly increase spread probability based on population density
-                                prob = EMPTY_SPREAD_PROB * (1 + population_density * SPREAD_DENSITY_SCALE)
 
-                            if np.random.random() < prob:
-                                new_grid[ny, nx] = FIRE
-                                new_fire_time[ny, nx] = 1
-
-        self.grid = new_grid
-        self.fire_time = new_fire_time
+    self.grid = new_grid
+    self.fire_time = new_fire_time
 ```
 
 The output is an animated sequence that shows the progression of fire over time, revealing how it moves more rapidly through forests and densely populated zones. These patterns highlight high-risk areas and provide crucial insight for optimizing emergency response strategies.
@@ -172,18 +172,18 @@ Brighter areas on the heatmap indicate locations that are consistently affected 
 
 ```python
 # Normalize final danger matrix before scaling
-    normalized_total_danger = normalize(total_danger)
-    scaled_danger = np.round(normalized_total_danger * 9).clip(0, 9).astype(int)
+normalized_total_danger = normalize(total_danger)
+scaled_danger = np.round(normalized_total_danger * 9).clip(0, 9).astype(int)
 
-    # Final display
-    plt.figure(figsize=(6, 6))
-    plt.imshow(scaled_danger, cmap="inferno", interpolation="nearest")
-    plt.title("Predicted Fire Danger Map (Next 100 Steps)")
-    plt.axis("off")
-    plt.colorbar(label="Danger Level (0–9)")
-    plt.show()
+# Final display
+plt.figure(figsize=(6, 6))
+plt.imshow(scaled_danger, cmap="inferno", interpolation="nearest")
+plt.title("Predicted Fire Danger Map (Next 100 Steps)")
+plt.axis("off")
+plt.colorbar(label="Danger Level (0–9)")
+plt.show()
 
-    return scaled_danger, fire_sim.fire_time, city, forest
+return scaled_danger, fire_sim.fire_time, city, forest
 ```
 
 This heatmap reveals the most dangerous regions in the next 100 timesteps and serves as a probability-based model of future fire impact. Areas with higher values indicate both greater flammability and a higher likelihood of sustained fire activity, often due to the combination of high population density and forest coverage.
@@ -196,8 +196,7 @@ This output becomes the foundation for the next stage—optimizing where to allo
 
 <h2 style="padding-top: 25px;">4: Optimizing Resource Deployment with Quantum Computing</h2>
 Using the heatmap, we build an optimization problem to determine the best locations for emergency responders. Our goal is to place the fewest units possible while still covering all high-risk areas. To do this, we convert the problem into a Quadratic Unconstrained Binary Optimization (QUBO) model.
-We also include a penalty that discourages placing units too close together, ensuring wide coverage across the map. This QUBO model is then solved using quantum-inspired algorithms, such as simulated annealing, to find an efficient deployment strategy.
-The output is a binary matrix showing the optimal responder placements. Each 1 in the matrix represents a location where a responder should be stationed based on risk, spacing, and efficiency.
+We also include a penalty that discourages placing units too close together, ensuring wide coverage across the map. This QUBO model is then solved using quantum-inspired algorithms, such as simulated annealing, to find an efficient deployment strategy. The output is a binary matrix showing the optimal responder placements. 
 
 ```python
 def matrix_to_qubo(matrix, alpha=2, beta=4, allow_adjacent_penalty=True):
