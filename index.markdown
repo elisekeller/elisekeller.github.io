@@ -17,7 +17,7 @@ Our team is composed of four undergraduate students—two from Boston University
 ---
 
 <h2 style="padding-top: 25px;">QUBO Formulation: Structuring the Optimization Problem</h2>
-Before diving into the quantum aspect of our work, we first focused on optimizing the problem using a QUBO formulation. A QUBO (Quadratic Unconstrained Binary Optimization) is a way of **representing** an optimization problem using binary variables. It's commonly used in areas like scheduling, graph analysis, and, in our case, resource allocation. By incorporating penalties for placing resources too close together, the QUBO helps us model important constraints and make more strategic decisions about where support is most needed.
+Before diving into the quantum aspect of our work, we first focused on optimizing the problem using a QUBO formulation. A QUBO (Quadratic Unconstrained Binary Optimization) is a way of representing an optimization problem using binary variables. It's commonly used in areas like scheduling, graph analysis, and, in our case, resource allocation. By incorporating penalties for placing resources too close together, the QUBO helps us model important constraints and make more strategic decisions about where support is most needed.
 
 ---
 
