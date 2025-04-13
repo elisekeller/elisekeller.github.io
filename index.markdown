@@ -27,10 +27,11 @@ The quantum component of our project lies in the optimization of the QUBO. We co
 
 ## How The Simulation Works:
 
-### Simulation
 We separated our challenge into two separate parts to best utilize an effective method in which quantum computing will help to determine the proper course of action in preventing wildfires. 
 
-The first section of our method is simulation; accurately plotting a randomly generated city and collection of forests/arid material using a matrix. The cities are represented by a population density from integers 0 to 7, and distributed so that denser cells were are likely to originate next to each other, and away from forest/arid material. 
+### Simulation
+
+The first phase of our method involves simulating a wildfire scenario, by accurately plotting a randomly generated city and collection of forests/arid material using a matrix. The cities are represented by a population density from integers 0 to 7, and distributed so that denser cells were are likely to originate next to each other, and away from forest/arid material. 
 
 After creating a matrix, we can run the simulation of fire spreading from a randomly determined forest origin. The probability of adjacent cells catching fire is determined by their weight in population density and material (arid material or not). Increased density and arid material increase the probability of fire spread to simulate how largely dense areas tend to increase fire propagation. 
 
