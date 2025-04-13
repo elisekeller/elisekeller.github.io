@@ -64,7 +64,7 @@ Effectively, a practical implementation of this type of program would be able to
 
 
 
-<center><h2 style="padding-top: 100px;">Fire Spread Analysis and Optimization Results</h2></center>
+<center><h2 style="padding-top: 50px;">Fire Spread Analysis and Optimization Results</h2></center>
 
 ### 1: Simulating a City and Environment
 We first create a synthetic environment using city_generator.py and Forest.py. Cities are represented as matrices with population densities ranging from 0 to 7, while forests and arid materials are scattered throughout the grid.
@@ -87,8 +87,7 @@ forest = np.random.choice([0, 1], size=(n, n), p=[0.75, 0.25])
 ---
 
 ### 2: Simulating Fire Spread Over Time
-Next, we ignite a fire at a randomly selected forest location. The fire spreads across the matrix over a series of timesteps. Whether a cell catches fire depends on its surrounding conditions — densely populated areas and nearby forests are more likely to ignite.
-This spreading process is repeated frame-by-frame to visualize how the fire grows. The output is an animated sequence that shows the progression of fire through time, revealing patterns and high-risk zones that are critical for decision-making.
+Next, we ignite a fire at a randomly selected forest location. The fire spreads across the matrix over a series of timesteps. Whether a cell catches fire depends on its surrounding conditions — densely populated areas and nearby forests are more likely to ignite. This spreading process is repeated frame-by-frame to visualize how the fire grows. 
 ```
 # Fire spread logic: higher density and forest = higher chance
 def spread_fire(city, forest, fire, p_base=0.1):
@@ -104,6 +103,11 @@ def spread_fire(city, forest, fire, p_base=0.1):
                             new_fire[ni, nj] = 1
     return new_fire
 ```
+The output is an animated sequence that shows the progression of fire through time, revealing patterns and high-risk zones that are critical for decision-making.
+<h2 style="padding-top: 10px;"></h2>
+![Fire Spread](/images/image3.gif){:width="400"}
+
+Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
 
 ---
 
@@ -120,6 +124,11 @@ for _ in range(num_simulations):
         heatmap += fire
 heatmap = heatmap / num_simulations  # Normalize to get probabilities
 ```
+
+<h2 style="padding-top: 10px;"></h2>
+<img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
+
+Heatmap of Wildfire Spread 100 timesteps into the future; distribution determines the most dangerous future cells with respect to the cell value (The population density of that cell)
 
 ---
 
@@ -162,30 +171,15 @@ def evaluate_coverage(risk_map, placement):
     return coverage_score, unit_count
 ```
 
-
-
-
-
-<h2 style="padding-top: 10px;"></h2>
-![yay](/images/image3.gif){:width="400"}
-
-
-Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
-
----
-
-<h2 style="padding-top: 10px;"></h2>
-<img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
-
-Heatmap of Wildfire Spread 100 timesteps into the future; distribution determines the most dangerous future cells with respect to the cell value (The population density of that cell)
-
----
-
 <h2 style="padding-top: 30px;"></h2>
 <img src="/images/image2.png" alt="" width="800">
 <h2 style="padding-top: 15px;"></h2>
 
 Heatmap changes that reflect where the Optimized Deployment of first responders and aid should be 100 timesteps into the future. Due to limitations of quantum simulation/classical computing, the original heatmap must be reduced down to a 50x50 matrix. Quantum computing could find the optimal solution on the 250x250 in exponentially less time.
+
+
+
+
 
 
 
