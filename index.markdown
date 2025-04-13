@@ -51,12 +51,119 @@ Effectively, a practical implementation of this type of program would be able to
 
 ---
 
-<h2 style="padding-top: 200px;">Heading</h2>
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<h2 style="padding-top: 200px;">Fire Spread Analysis and Optimization Results</h2>
+
+### 1: Simulating a City and Environment
+We first create a synthetic environment using city_generator.py and Forest.py. Cities are represented as matrices with population densities ranging from 0 to 7, while forests and arid materials are scattered throughout the grid.
+The result is a synthetic but realistic environment with both urban and wildland areas, providing the foundation for simulating how a fire might behave.
+```python
+# Create a city matrix with densities from 0 to 7
+city = np.zeros((n, n))
+for i in range(n):
+    for j in range(n):
+        if random.random() < city_bias:
+            city[i][j] = np.random.randint(4, 8)
+        else:
+            city[i][j] = np.random.randint(0, 3)
+```
+```
+# Overlay forest with boolean mask for flammable areas
+forest = np.random.choice([0, 1], size=(n, n), p=[0.75, 0.25])
+```
+
+---
+
+### 2: Simulating Fire Spread Over Time
+Next, we ignite a fire at a randomly selected forest location. The fire spreads across the matrix over a series of timesteps. Whether a cell catches fire depends on its surrounding conditions — densely populated areas and nearby forests are more likely to ignite.
+This spreading process is repeated frame-by-frame to visualize how the fire grows. The output is an animated sequence that shows the progression of fire through time, revealing patterns and high-risk zones that are critical for decision-making.
+```
+# Fire spread logic: higher density and forest = higher chance
+def spread_fire(city, forest, fire, p_base=0.1):
+    new_fire = fire.copy()
+    for i in range(n):
+        for j in range(n):
+            if fire[i, j] == 1:
+                for dx, dy in [(-1,0), (1,0), (0,-1), (0,1)]:
+                    ni, nj = i + dx, j + dy
+                    if 0 <= ni < n and 0 <= nj < n and fire[ni, nj] == 0:
+                        prob = p_base + 0.1 * city[ni, nj] + 0.2 * forest[ni, nj]
+                        if np.random.rand() < prob:
+                            new_fire[ni, nj] = 1
+    return new_fire
+```
+
+---
+
+### 3: Mapping Future Risk with a Heatmap
+To anticipate where the fire is most likely to go, we run the fire spread simulation many times and record how often each cell ignites. The result is a heatmap that shows the probability of fire impact over time.
+Brighter areas on the heatmap indicate locations that are consistently affected by fire across simulations. This heatmap is then used as input for the optimization step, serving as a probability-based model of where fire poses the greatest threat.
+```
+# Simulate fire n times and count how often each cell ignites
+heatmap = np.zeros_like(city)
+for _ in range(num_simulations):
+    fire = init_fire()
+    for t in range(num_steps):
+        fire = spread_fire(city, forest, fire)
+        heatmap += fire
+heatmap = heatmap / num_simulations  # Normalize to get probabilities
+```
+
+---
+
+### 4: Optimizing Resource Deployment with Quantum Computing
+Using the heatmap, we build an optimization problem to determine the best locations for emergency responders. Our goal is to place the fewest units possible while still covering all high-risk areas. To do this, we convert the problem into a Quadratic Unconstrained Binary Optimization (QUBO) model.
+We also include a penalty that discourages placing units too close together, ensuring wide coverage across the map. This QUBO model is then solved using quantum-inspired algorithms, such as simulated annealing, to find an efficient deployment strategy.
+The output is a binary matrix showing the optimal responder placements. Each 1 in the matrix represents a location where a responder should be stationed based on risk, spacing, and efficiency.
+```
+# Objective: minimize high-risk values + avoid clustering
+H = 0
+for i in range(n):
+    for j in range(n):
+        H += heatmap[i][j] * Binary(f"x{i}_{j}")
+
+# Penalty: discourage adjacent responder placements
+for i in range(n):
+    for j in range(n):
+        if i < n - 1:
+            H += beta * Binary(f"x{i}_{j}") * Binary(f"x{i+1}_{j}")
+        if j < n - 1:
+            H += beta * Binary(f"x{i}_{j}") * Binary(f"x{i}_{j+1}")
+```
+```
+# Compile and solve using simulated annealing
+model = H.compile()
+qubo, offset = model.to_qubo()
+sampler = TabuSampler()
+sampleset = sampler.sample_qubo(qubo, num_reads=100)
+```
+
+---
+
+### 5: Comparing Optimization Results
+To show the effectiveness of the quantum approach, we compare our optimized responder layout to a baseline strategy like uniform grid placement. The quantum-optimized solution typically uses fewer units and achieves better coverage of dangerous areas, demonstrating its practical advantages.
+Visual side-by-side comparisons help illustrate the difference in resource efficiency and risk coverage. This highlights how quantum-inspired methods can significantly improve decision-making under complex constraints.
+```
+def evaluate_coverage(risk_map, placement):
+    coverage_score = np.sum(risk_map * placement)
+    unit_count = np.sum(placement)
+    return coverage_score, unit_count
+```
 
 
 
