@@ -7,13 +7,17 @@ title:
 ---
 
 
-## Section 1
+# Section 1
 
-This content is rendered directly into the layout between the header and footer.
+<div>
+    <p>HTML test paragraph.</p>
+</div>
 
 ---
 
-## Section 2
+
+
+# Section 2
 Code example:
 
 ```js
@@ -24,5 +28,5 @@ function greet(name) {
 
 ---
 
-## Section 3
+# Section 3
 dsfkjhskjdfhjksdf
