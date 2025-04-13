@@ -63,10 +63,7 @@ Heatmap changes that reflect where the Optimized Deployment of first responders 
 
 ---
 
-<body>   </body>
-
-  <img src="/images/fire-spread.gif" alt="Fire Spread" style="display:block; margin:0 auto;">
-
+<img src="/images/fire-spread.gif" alt="Fire Spread">
 
 Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
 
