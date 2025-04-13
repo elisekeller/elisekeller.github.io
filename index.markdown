@@ -5,10 +5,11 @@
 layout: default
 ---
 
-<center><h1> Optimizing Wildfire Response with Quantum Intelligence </h1></center>
+<center><h1> Enhancing Wildfire Response through Quantum Optimization </h1></center>
 Welcome to Qooked! Here, our team has created a website built to understand and simulate the path of fires. Partnering with Tahoe-Quantum, we have created an algorithm that simulates the expected destruction of fires with respect to population density and terrain, which creates a matrix with the optimal placement of first responders based on estimated paths of most damage. Our hope is to create an innovative solution that will not only save money, but save lives. 
 
----
+
+
 
 ## About Us:
 Our team is composed of 4 undergraduate students, two from Boston University and 2 from Brandeis. United by a love for quantum computing, we took on this challenge in the hopes of using our knowledge to benefit the world in a progressive way. 
