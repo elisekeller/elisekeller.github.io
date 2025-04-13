@@ -3,6 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
+title: 
 ---
 
 
@@ -10,7 +11,7 @@ layout: default
 
 This content is rendered directly into the layout between the header and footer.
 
-
+---
 
 ## Section 2
 Code example:
