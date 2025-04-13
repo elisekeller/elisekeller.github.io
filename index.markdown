@@ -1,7 +1,23 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-#layout: page
-#title: Welcome
+layout: default
+title:  Content
+permalink: /content/
 ---
+
+<section>
+  <h2>Welcome to the Inserted Content Page</h2>
+  <p>This content is rendered directly into the <code>{{ content }}</code> area of the default layout.</p>
+</section>
+
+<hr>
+
+<section>
+  <h2>Code Example</h2>
+  <pre><code>
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+  </code></pre>
+</section>
+
+
