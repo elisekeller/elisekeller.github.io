@@ -74,11 +74,11 @@ The result is a synthetic but realistic environment with both urban and wildland
 def generate_large_cluster_city_matrix(size, forest_matrix, smoothness=10.0, distance_influence=2.0, center_bias=2.0):
     """
     Generates a city layout matrix with population density favorably distributed:
-        
     -1 = TREE (unbuildable)
     0  = buildable but unpopulated
     1–8 = increasing levels of population density
-    """# Step 1: Random noise, smoothed
+    """
+    # Step 1: Random noise, smoothed
     raw_noise = np.random.rand(size, size)
     smoothed = gaussian_filter(raw_noise, sigma=smoothness)
 
