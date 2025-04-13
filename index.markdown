@@ -50,7 +50,7 @@ Effectively, a practical implementation of this type of program would be able to
 ---
 
 <div style="text-align: center;">
-  <img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="500">
+  <img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
 </div>
 Heatmap of Wildfire Spread 100 timesteps into the future; distribution determines the most dangerous future cells with respect to the cell value (The population density of that cell)
 
@@ -64,9 +64,9 @@ Heatmap changes that reflect where the Optimized Deployment of first responders 
 ---
 
 <body>   </body>
-<div style="text-align: center;">
-  <img src="/images/fire-spread.gif" alt="Fire Spread" width="600">
-</div>
+
+  <img src="/images/fire-spread.gif" alt="Fire Spread" style="display:block; margin:0 auto;">
+
 
 Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
 
