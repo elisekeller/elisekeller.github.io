@@ -129,7 +129,6 @@ for _ in range(num_simulations):
 heatmap = heatmap / num_simulations  # Normalize to get probabilities
 ```
 
-<h2 style="padding-top: 10px;"></h2>
 <img src="/images/image1.png" alt="Predicted Fire Danger Map (Next 100 Steps)" width="400">
 
 Heatmap of Wildfire Spread 100 timesteps into the future; distribution determines the most dangerous future cells with respect to the cell value (The population density of that cell)
