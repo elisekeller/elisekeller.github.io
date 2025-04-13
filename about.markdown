@@ -1,18 +1,28 @@
 ---
-layout: page
+layout: default
 title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+## About Qooked
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+Qooked is a lightweight, minimalist site built with Jekyll. It’s designed to be simple, functional, and easy to extend.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+## Mission
 
+We aim to create an online presence that reflects clarity and creativity. No clutter, just content.
 
-[jekyll-organization]: https://github.com/jekyll
+## Features
+
+- Jekyll-powered static site
+- Sticky table of contents
+- Custom header and layout
+- Responsive design
+
+## Meet the Creator
+
+Hi, I’m Elise! I enjoy building beautiful things with clean code and minimal design. Qooked is a passion project.
+
+## Contact
+
+Feel free to reach out at [elisekeller14@gmail.com](mailto:elisekeller14@gmail.com)
