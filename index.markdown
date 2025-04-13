@@ -108,7 +108,6 @@ def spread_fire(city, forest, fire, p_base=0.1):
 ```
 
 The output is an animated sequence that shows the progression of fire through time, revealing patterns and high-risk zones that are critical for decision-making.
-<h2 style="padding-top: 10px;"></h2>
 ![Fire Spread](/images/image3.gif){:width="400"}
 
 Animation of how fire spreads through forest and populated territory. Simulates resistance from low density areas in comparison to the faster growth in forests and high population density locations
