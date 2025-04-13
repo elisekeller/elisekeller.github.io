@@ -30,7 +30,7 @@ The quantum component of our project lies in the optimization of the QUBO. We co
 
 We separated our challenge into two separate parts to best utilize an effective method in which quantum computing will help to determine the proper course of action in preventing wildfires. 
 
-### Simulation
+### Simulating Fire Spread
 
 The first phase of our method involves simulating a wildfire scenario, by accurately plotting a randomly generated city and collection of forests/arid material using a matrix. The cities are represented by a population density from integers 0 to 7, and distributed so that denser cells were are likely to originate next to each other, and away from forest/arid material. 
 
